@@ -23,28 +23,132 @@
   }
 }
 
-/* Gallery-specific glossy styling */
+/* Enhanced 3D transformations */
+@keyframes float-3d {
+  0%, 100% { transform: translateY(0) translateZ(0) rotateX(0deg) rotateY(0deg); }
+  25% { transform: translateY(-10px) translateZ(20px) rotateX(2deg) rotateY(-2deg); }
+  50% { transform: translateY(-15px) translateZ(10px) rotateX(-1deg) rotateY(3deg); }
+  75% { transform: translateY(-5px) translateZ(15px) rotateX(1deg) rotateY(-1deg); }
+}
+
+.rotate-3d {
+  animation: float-3d 15s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.rotate-y-3 {
+  transform: rotateY(3deg);
+}
+
+.rotate-y-6 {
+  transform: rotateY(6deg);
+}
+
+.rotate-y-12 {
+  transform: rotateY(12deg);
+}
+
+.rotate-x-2 {
+  transform: rotateX(2deg);
+}
+
+.rotate-x-4 {
+  transform: rotateX(4deg);
+}
+
+.translate-z-0 {
+  transform: translateZ(0px);
+}
+
+.translate-z-10 {
+  transform: translateZ(10px);
+}
+
+.translate-z-20 {
+  transform: translateZ(20px);
+}
+
+.translate-z-40 {
+  transform: translateZ(40px);
+}
+
+.-translate-z-10 {
+  transform: translateZ(-10px);
+}
+
+.-translate-z-20 {
+  transform: translateZ(-20px);
+}
+
+.-translate-z-40 {
+  transform: translateZ(-40px);
+}
+
+/* Enhanced Gallery-specific glossy styling */
 .gallery-card {
   position: relative;
   transform-style: preserve-3d;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
 }
 
 .gallery-card:hover {
-  transform: translateY(-5px) scale(1.01);
+  transform: translateY(-8px) scale(1.02);
 }
 
 .gallery-card::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(174, 217, 224, 0.2), rgba(107, 206, 206, 0.05));
+  background: linear-gradient(135deg, rgba(174, 217, 224, 0.3), rgba(107, 206, 206, 0.1));
   border-radius: 0.75rem;
   z-index: -1;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.6s ease;
 }
 
 .gallery-card:hover::before {
   opacity: 1;
+}
+
+/* Enhanced 3D shadows */
+.premium-shadow-3d {
+  box-shadow: 
+    0 10px 30px -5px rgba(107, 206, 206, 0.2),
+    0 5px 15px -3px rgba(107, 206, 206, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  transition: box-shadow 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.premium-shadow-3d:hover {
+  box-shadow: 
+    0 20px 40px -10px rgba(107, 206, 206, 0.25),
+    0 10px 20px -5px rgba(107, 206, 206, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.shadow-3d {
+  box-shadow: 
+    0 10px 20px -5px rgba(91, 158, 173, 0.2),
+    0 5px 10px -3px rgba(91, 158, 173, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  transition: box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Enhanced 3D perspective */
+.perspective-3d {
+  perspective: 2000px;
+  transform-style: preserve-3d;
+}
+
+.transform-gpu {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.transform-3d {
+  transform-style: preserve-3d;
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  will-change: transform;
 }
