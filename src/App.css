@@ -23,7 +23,7 @@
   }
 }
 
-/* Enhanced 3D transformations with improved depth perception */
+/* Enhanced 3D transformations */
 @keyframes float-3d {
   0%, 100% { transform: translateY(0) translateZ(0) rotateX(0deg) rotateY(0deg); }
   25% { transform: translateY(-10px) translateZ(20px) rotateX(2deg) rotateY(-2deg); }
@@ -111,20 +111,20 @@
   opacity: 1;
 }
 
-/* Enhanced 3D shadows with more pronounced depth */
+/* Enhanced 3D shadows */
 .premium-shadow-3d {
   box-shadow: 
-    0 10px 30px -5px rgba(107, 206, 206, 0.25),
-    0 5px 15px -3px rgba(107, 206, 206, 0.2),
-    0 0 0 1px rgba(255, 255, 255, 0.15);
+    0 10px 30px -5px rgba(107, 206, 206, 0.2),
+    0 5px 15px -3px rgba(107, 206, 206, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
   transition: box-shadow 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .premium-shadow-3d:hover {
   box-shadow: 
-    0 25px 50px -12px rgba(107, 206, 206, 0.3),
-    0 10px 30px -5px rgba(107, 206, 206, 0.25),
-    0 0 0 1px rgba(255, 255, 255, 0.2);
+    0 20px 40px -10px rgba(107, 206, 206, 0.25),
+    0 10px 20px -5px rgba(107, 206, 206, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.15);
 }
 
 .shadow-3d {
@@ -135,7 +135,7 @@
   transition: box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* Enhanced 3D perspective with better depth cues */
+/* Enhanced 3D perspective */
 .perspective-3d {
   perspective: 2000px;
   transform-style: preserve-3d;
@@ -152,88 +152,3 @@
   transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   will-change: transform;
 }
-
-/* New premium effects with enhanced glow */
-.shadow-glow {
-  box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.4);
-}
-
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 5px 0px rgba(255, 255, 255, 0.3); }
-  50% { box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.5); }
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 3s infinite;
-}
-
-/* Enhanced holographic effect with more dramatic color shift */
-.holographic-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.05) 25%,
-    rgba(255, 255, 255, 0.15) 50%,
-    rgba(255, 255, 255, 0.05) 75%,
-    transparent 100%
-  );
-  background-size: 400% 400%;
-  animation: gradient-shift 8s ease infinite;
-  pointer-events: none;
-}
-
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Enhanced light ray effects with more pronounced movement */
-.light-ray {
-  position: absolute;
-  width: 150%;
-  height: 300px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-  transform: rotate(35deg) translateY(-50%);
-  top: 50%;
-  left: -25%;
-  animation: ray-move 6s ease-in-out infinite;
-  pointer-events: none;
-  opacity: 0.5;
-}
-
-@keyframes ray-move {
-  0% { transform: rotate(35deg) translateY(-50%) translateX(-30%); opacity: 0; }
-  30% { opacity: 0.7; }
-  70% { opacity: 0.7; }
-  100% { transform: rotate(35deg) translateY(-50%) translateX(130%); opacity: 0; }
-}
-
-/* New scroll locking transition */
-.scroll-lock-transition {
-  transition: all 0.5s ease-out;
-}
-
-/* Enhanced slide transition for scroll stack */
-@keyframes slide-in {
-  from { 
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
-  }
-  to { 
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.slide-in {
-  animation: slide-in 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-}
-
-/* Staggered animation delays for sequenced effects */
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }

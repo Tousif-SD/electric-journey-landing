@@ -1,5 +1,5 @@
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import FeaturesSection from "@/components/FeaturesSection";
@@ -14,10 +14,7 @@ const Index = () => {
   // State to track overall page loading
   const [isLoaded, setIsLoaded] = useState(false);
   
-  // Ref for the showcase section to handle scroll locking
-  const showcaseSectionRef = useRef<HTMLElement | null>(null);
-  
-  // Smooth scroll implementation with awareness of scroll-locked sections
+  // Smooth scroll implementation
   useEffect(() => {
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -27,10 +24,6 @@ const Index = () => {
         
         if (element) {
           e.preventDefault();
-          
-          // Unlock scrolling to allow smooth scroll navigation
-          document.body.style.overflow = '';
-          
           element.scrollIntoView({
             behavior: 'smooth'
           });
@@ -53,27 +46,16 @@ const Index = () => {
 
   return (
     <div className={`relative min-h-screen ${isLoaded ? 'animate-fade-in' : 'opacity-0'}`}>
-      {/* Enhanced premium light effects overlay */}
-      <div className="fixed inset-0 pointer-events-none z-50 opacity-20">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-teal/5 to-transparent"></div>
-        <div className="light-ray" style={{ animationDelay: "0s" }}></div>
-        <div className="light-ray" style={{ animationDelay: "2s" }}></div>
-        <div className="light-ray" style={{ animationDelay: "4s" }}></div>
-        <div className="light-ray" style={{ animationDelay: "6s", transform: "rotate(-35deg)" }}></div>
-      </div>
-      
       <Navbar />
-      
       <main className="w-full">
         <HeroSection />
         <FeaturesSection />
         <DesignSection />
         <TestimonialsSection />
         <GallerySection />
-        <ShowcaseSection ref={showcaseSectionRef} />
+        <ShowcaseSection />
         <CTASection />
       </main>
-      
       <Footer />
     </div>
   );
