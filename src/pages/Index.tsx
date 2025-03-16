@@ -44,7 +44,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className={`relative min-h-screen overflow-x-hidden ${isLoaded ? 'animate-fade-in' : 'opacity-0'}`}>
+    <div className={`relative min-h-screen ${isLoaded ? 'animate-fade-in' : 'opacity-0'}`}>
       <Navbar />
       <main className="w-full">
         <HeroSection />
