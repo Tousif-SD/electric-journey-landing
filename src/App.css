@@ -152,3 +152,61 @@
   transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   will-change: transform;
 }
+
+/* New premium effects */
+.shadow-glow {
+  box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.4);
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px 0px rgba(255, 255, 255, 0.3); }
+  50% { box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.5); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s infinite;
+}
+
+/* Holographic effect */
+.holographic-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 75%,
+    transparent 100%
+  );
+  background-size: 400% 400%;
+  animation: gradient-shift 8s ease infinite;
+  pointer-events: none;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Enhanced light ray effects */
+.light-ray {
+  position: absolute;
+  width: 150%;
+  height: 300px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: rotate(35deg) translateY(-50%);
+  top: 50%;
+  left: -25%;
+  animation: ray-move 6s ease-in-out infinite;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+@keyframes ray-move {
+  0% { transform: rotate(35deg) translateY(-50%) translateX(-30%); opacity: 0; }
+  30% { opacity: 0.5; }
+  70% { opacity: 0.5; }
+  100% { transform: rotate(35deg) translateY(-50%) translateX(130%); opacity: 0; }
+}
