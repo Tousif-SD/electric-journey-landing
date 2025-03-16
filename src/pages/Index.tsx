@@ -53,12 +53,13 @@ const Index = () => {
 
   return (
     <div className={`relative min-h-screen ${isLoaded ? 'animate-fade-in' : 'opacity-0'}`}>
-      {/* Premium light effects overlay */}
+      {/* Enhanced premium light effects overlay */}
       <div className="fixed inset-0 pointer-events-none z-50 opacity-20">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-teal/5 to-transparent"></div>
         <div className="light-ray" style={{ animationDelay: "0s" }}></div>
         <div className="light-ray" style={{ animationDelay: "2s" }}></div>
         <div className="light-ray" style={{ animationDelay: "4s" }}></div>
+        <div className="light-ray" style={{ animationDelay: "6s", transform: "rotate(-35deg)" }}></div>
       </div>
       
       <Navbar />
@@ -69,7 +70,7 @@ const Index = () => {
         <DesignSection />
         <TestimonialsSection />
         <GallerySection />
-        <ShowcaseSection />
+        <ShowcaseSection ref={showcaseSectionRef} />
         <CTASection />
       </main>
       
