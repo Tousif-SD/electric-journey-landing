@@ -152,3 +152,187 @@
   transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   will-change: transform;
 }
+
+/* Premium section specific styles */
+.premium-glass {
+  position: relative;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.decorative-line {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(to right, rgba(107, 206, 206, 0.2), rgba(107, 206, 206, 0.8), rgba(107, 206, 206, 0.2));
+  border-radius: 3px;
+}
+
+.shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-effect::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(45deg);
+  transition: all 1s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.shine-effect:hover::after {
+  transform: rotate(45deg) translateY(100%);
+  opacity: 0.3;
+}
+
+/* Holographic effects */
+.holographic-foil {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(107, 206, 206, 0.1) 25%,
+    rgba(142, 215, 198, 0.1) 50%,
+    rgba(174, 217, 224, 0.1) 75%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  background-size: 400% 400%;
+  animation: holographic-shift 15s ease infinite;
+}
+
+@keyframes holographic-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.holographic-glow {
+  background: linear-gradient(
+    45deg,
+    rgba(91, 158, 173, 0.05) 0%,
+    rgba(107, 206, 206, 0.1) 25%,
+    rgba(142, 215, 198, 0.05) 50%,
+    rgba(174, 217, 224, 0.1) 75%,
+    rgba(91, 158, 173, 0.05) 100%
+  );
+  background-size: 200% 200%;
+  animation: holographic-glow 10s ease infinite;
+  filter: blur(8px);
+}
+
+@keyframes holographic-glow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 150%; }
+  100% { background-position: 0% 50%; }
+}
+
+.overlay-grid {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Light effects for premium section */
+.light-ray {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, rgba(107, 206, 206, 0.05), transparent);
+  width: 100%;
+  height: 300px;
+  transform: rotate(35deg);
+  filter: blur(15px);
+  animation: light-ray-animation 8s ease-in-out infinite;
+}
+
+.light-ray-1 {
+  top: -100px;
+  left: -200px;
+  animation-delay: 0s;
+}
+
+.light-ray-2 {
+  top: 30%;
+  right: -200px;
+  animation-delay: 2s;
+}
+
+.light-ray-3 {
+  bottom: -100px;
+  left: 30%;
+  animation-delay: 4s;
+}
+
+@keyframes light-ray-animation {
+  0% { transform: rotate(35deg) translateX(-200px); opacity: 0; }
+  30% { opacity: 1; }
+  70% { opacity: 0.8; }
+  100% { transform: rotate(35deg) translateX(calc(100vw + 400px)); opacity: 0; }
+}
+
+.shine-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 75%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shine-animation 3s linear infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes shine-animation {
+  0% { background-position: -200% -200%; }
+  100% { background-position: 200% 200%; }
+}
+
+/* Button hover effects */
+.btn-hover-effect {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.btn-hover-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transition: all 0.5s ease;
+}
+
+.btn-hover-effect:hover::before {
+  left: 100%;
+}
+
+/* Gradient text */
+.gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, #6BCECE, #5B9EAD);
+}
