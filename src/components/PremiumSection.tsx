@@ -224,6 +224,7 @@ const PremiumSection = () => {
                       <Button 
                         className="bg-gradient-to-r from-brand-teal to-brand-dark-blue hover:bg-brand-teal/90 text-white px-6 py-5 rounded-lg btn-hover-effect group shine-effect"
                         size="lg"
+                        onClick={() => window.location.href = '/premium-options'}
                       >
                         <span>EXPLORE PREMIUM OPTIONS</span>
                         <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />

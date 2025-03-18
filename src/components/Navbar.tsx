@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X, ChevronRight, Search, ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -37,7 +38,7 @@ const Navbar = () => {
       <div className="container max-w-7xl mx-auto flex items-center justify-between px-4 lg:px-8">
         <div className="flex items-center">
           {/* Logo */}
-          <a href="#" className="relative z-10 flex items-center">
+          <Link to="/" className="relative z-10 flex items-center">
             <div className="flex items-center">
               <div className="text-brand-teal text-3xl font-bold mr-1 shine-effect">
                 <span className="flex items-center">
@@ -45,7 +46,7 @@ const Navbar = () => {
                 </span>
               </div>
             </div>
-          </a>
+          </Link>
         </div>
 
         {/* Desktop Navigation */}
@@ -53,19 +54,19 @@ const Navbar = () => {
           <NavigationMenuList>
             <NavigationMenuItem>
               <NavigationMenuLink 
-                href="#home"
+                asChild
                 className="nav-link"
               >
-                HOME
+                <Link to="/">HOME</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             
             <NavigationMenuItem>
               <NavigationMenuLink 
-                href="#products"
+                asChild
                 className="nav-link"
               >
-                PRODUCTS
+                <Link to="/products">PRODUCTS</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             
@@ -79,9 +80,9 @@ const Navbar = () => {
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                   <li className="row-span-3">
                     <NavigationMenuLink asChild>
-                      <a
+                      <Link
                         className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-brand-teal/20 to-brand-mint/20 p-6 no-underline outline-none focus:shadow-md transform transition-all duration-300 hover:scale-[1.02]"
-                        href="#gallery"
+                        to="/gallery"
                       >
                         <div className="mt-4 mb-2 text-lg font-medium">
                           Premium Collection
@@ -89,37 +90,37 @@ const Navbar = () => {
                         <p className="text-sm leading-tight text-muted-foreground">
                           Explore our premium electric bike collection through stunning visuals
                         </p>
-                      </a>
+                      </Link>
                     </NavigationMenuLink>
                   </li>
                   <li>
                     <NavigationMenuLink asChild>
-                      <a href="#gallery" className="nav-dropdown-item">
+                      <Link to="/gallery/urban" className="nav-dropdown-item">
                         <div className="text-sm font-medium leading-none">Urban Series</div>
                         <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                           Perfect for city commuting
                         </p>
-                      </a>
+                      </Link>
                     </NavigationMenuLink>
                   </li>
                   <li>
                     <NavigationMenuLink asChild>
-                      <a href="#gallery" className="nav-dropdown-item">
+                      <Link to="/gallery/adventure" className="nav-dropdown-item">
                         <div className="text-sm font-medium leading-none">Adventure Series</div>
                         <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                           Built for off-road exploration
                         </p>
-                      </a>
+                      </Link>
                     </NavigationMenuLink>
                   </li>
                   <li>
                     <NavigationMenuLink asChild>
-                      <a href="#gallery" className="nav-dropdown-item">
+                      <Link to="/gallery/performance" className="nav-dropdown-item">
                         <div className="text-sm font-medium leading-none">Performance Series</div>
                         <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                           Maximum speed and efficiency
                         </p>
-                      </a>
+                      </Link>
                     </NavigationMenuLink>
                   </li>
                 </ul>
@@ -128,19 +129,19 @@ const Navbar = () => {
             
             <NavigationMenuItem>
               <NavigationMenuLink 
-                href="#features"
+                asChild
                 className="nav-link"
               >
-                FEATURES
+                <Link to="/features">FEATURES</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             
             <NavigationMenuItem>
               <NavigationMenuLink 
-                href="#contact"
+                asChild
                 className="nav-link"
               >
-                CONTACT
+                <Link to="/contact">CONTACT</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
           </NavigationMenuList>
@@ -153,11 +154,13 @@ const Navbar = () => {
           </Button>
           <Button 
             className="border border-brand-teal/60 bg-transparent hover:bg-brand-teal/10 text-foreground hover:text-brand-teal rounded-md transition-all duration-300"
+            onClick={() => window.location.href = '/login'}
           >
             LOGIN
           </Button>
           <Button 
             className="bg-brand-teal hover:bg-brand-teal/90 text-white rounded-md btn-hover-effect group shine-effect"
+            onClick={() => window.location.href = '/get-started'}
           >
             GET STARTED
             <ArrowUpRight className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -199,19 +202,21 @@ const Navbar = () => {
             </button>
           </div>
           <div className="flex flex-col space-y-4">
-            <MobileNavLink href="#home" onClick={() => setIsMobileMenuOpen(false)}>Home</MobileNavLink>
-            <MobileNavLink href="#products" onClick={() => setIsMobileMenuOpen(false)}>Products</MobileNavLink>
-            <MobileNavLink href="#gallery" onClick={() => setIsMobileMenuOpen(false)}>Gallery</MobileNavLink>
-            <MobileNavLink href="#features" onClick={() => setIsMobileMenuOpen(false)}>Features</MobileNavLink>
-            <MobileNavLink href="#contact" onClick={() => setIsMobileMenuOpen(false)}>Contact</MobileNavLink>
+            <MobileNavLink to="/" onClick={() => setIsMobileMenuOpen(false)}>Home</MobileNavLink>
+            <MobileNavLink to="/products" onClick={() => setIsMobileMenuOpen(false)}>Products</MobileNavLink>
+            <MobileNavLink to="/gallery" onClick={() => setIsMobileMenuOpen(false)}>Gallery</MobileNavLink>
+            <MobileNavLink to="/features" onClick={() => setIsMobileMenuOpen(false)}>Features</MobileNavLink>
+            <MobileNavLink to="/contact" onClick={() => setIsMobileMenuOpen(false)}>Contact</MobileNavLink>
             <Button 
               className="mt-4 bg-brand-teal hover:bg-brand-teal/90 text-white w-full btn-hover-effect"
+              onClick={() => window.location.href = '/login'}
             >
               LOGIN
             </Button>
             <Button 
               variant="outline"
               className="border border-brand-teal/60 bg-transparent hover:bg-brand-teal/10 text-foreground w-full group"
+              onClick={() => window.location.href = '/get-started'}
             >
               GET STARTED
               <ArrowUpRight className="h-4 w-4 ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -223,16 +228,16 @@ const Navbar = () => {
   );
 };
 
-const MobileNavLink = ({ href, onClick, children }: { href: string; onClick: () => void; children: React.ReactNode }) => {
+const MobileNavLink = ({ to, onClick, children }: { to: string; onClick: () => void; children: React.ReactNode }) => {
   return (
-    <a
-      href={href}
+    <Link
+      to={to}
       onClick={onClick}
       className="flex items-center justify-between py-2 text-foreground hover:text-brand-teal transition-colors border-b border-white/10 pb-2 hover:pl-2 duration-300"
     >
       {children}
       <ChevronRight className="h-5 w-5" />
-    </a>
+    </Link>
   );
 };
 
