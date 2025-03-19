@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
@@ -57,10 +58,14 @@ const PremiumSection = () => {
     };
     
     const section = sectionRef.current;
-    section?.addEventListener('mousemove', handleMouseMove);
+    if (section) {
+      section.addEventListener('mousemove', handleMouseMove);
+    }
     
     return () => {
-      section?.removeEventListener('mousemove', handleMouseMove);
+      if (section) {
+        section.removeEventListener('mousemove', handleMouseMove);
+      }
     };
   }, []);
 
@@ -68,6 +73,7 @@ const PremiumSection = () => {
     <section 
       id="premium"
       ref={(node) => {
+        // Fixed TypeScript error by using proper type checking
         if (node) {
           sectionRef.current = node;
           ref(node);

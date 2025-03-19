@@ -1,9 +1,40 @@
-
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { Sparkles, Zap, Diamond, Award } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+
+// Innovation features data
+const innovationFeatures = [
+  {
+    title: "Advanced Battery Tech",
+    description: "Our proprietary battery technology delivers 40% more range than competitors, with smart temperature management and ultra-fast charging capabilities.",
+    icon: Zap,
+    position: { x: 30, y: 50 },
+    textPosition: "-50%, calc(-100% - 16px)"
+  },
+  {
+    title: "Intelligent Suspension",
+    description: "Adaptive suspension system that automatically adjusts to road conditions 200 times per second, providing unmatched comfort and handling.",
+    icon: Sparkles,
+    position: { x: 60, y: 30 },
+    textPosition: "20px, -50%"
+  },
+  {
+    title: "Premium Materials",
+    description: "Aerospace-grade carbon fiber and sustainable materials create a frame that's lighter, stronger, and more environmentally conscious.",
+    icon: Diamond,
+    position: { x: 75, y: 60 },
+    textPosition: "20px, -50%"
+  },
+  {
+    title: "Award-winning Design",
+    description: "Our design philosophy merges form and function seamlessly, earning recognition from the world's most prestigious design institutions.",
+    icon: Award,
+    position: { x: 40, y: 80 },
+    textPosition: "-50%, -100%"
+  }
+];
 
 const InnovationSection = () => {
   const { ref, inView } = useInView({
@@ -242,37 +273,5 @@ const InnovationSection = () => {
     </section>
   );
 };
-
-// Innovation features data
-const innovationFeatures = [
-  {
-    title: "Advanced Battery Tech",
-    description: "Our proprietary battery technology delivers 40% more range than competitors, with smart temperature management and ultra-fast charging capabilities.",
-    icon: Zap,
-    position: { x: 30, y: 50 },
-    textPosition: "-50%, calc(-100% - 16px)"
-  },
-  {
-    title: "Intelligent Suspension",
-    description: "Adaptive suspension system that automatically adjusts to road conditions 200 times per second, providing unmatched comfort and handling.",
-    icon: Sparkles,
-    position: { x: 60, y: 30 },
-    textPosition: "20px, -50%"
-  },
-  {
-    title: "Premium Materials",
-    description: "Aerospace-grade carbon fiber and sustainable materials create a frame that's lighter, stronger, and more environmentally conscious.",
-    icon: Diamond,
-    position: { x: 75, y: 60 },
-    textPosition: "20px, -50%"
-  },
-  {
-    title: "Award-winning Design",
-    description: "Our design philosophy merges form and function seamlessly, earning recognition from the world's most prestigious design institutions.",
-    icon: Award,
-    position: { x: 40, y: 80 },
-    textPosition: "-50%, -100%"
-  }
-];
 
 export default InnovationSection;
