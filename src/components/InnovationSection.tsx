@@ -1,15 +1,18 @@
+
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { Sparkles, Zap, Diamond, Award } from "lucide-react";
+import { Sparkles, Zap, Diamond, Award, ChevronRight, Lightbulb, Cpu, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
-// Innovation features data
+// Innovation features data - updated with new styling for smaller cards
 const innovationFeatures = [
   {
     title: "Advanced Battery Tech",
     description: "Our proprietary battery technology delivers 40% more range than competitors, with smart temperature management and ultra-fast charging capabilities.",
     icon: Zap,
+    color: "from-cyan-500 to-blue-500",
     position: { x: 30, y: 50 },
     textPosition: "-50%, calc(-100% - 16px)"
   },
@@ -17,6 +20,7 @@ const innovationFeatures = [
     title: "Intelligent Suspension",
     description: "Adaptive suspension system that automatically adjusts to road conditions 200 times per second, providing unmatched comfort and handling.",
     icon: Sparkles,
+    color: "from-emerald-400 to-teal-500",
     position: { x: 60, y: 30 },
     textPosition: "20px, -50%"
   },
@@ -24,6 +28,7 @@ const innovationFeatures = [
     title: "Premium Materials",
     description: "Aerospace-grade carbon fiber and sustainable materials create a frame that's lighter, stronger, and more environmentally conscious.",
     icon: Diamond,
+    color: "from-indigo-400 to-purple-500", 
     position: { x: 75, y: 60 },
     textPosition: "20px, -50%"
   },
@@ -31,8 +36,31 @@ const innovationFeatures = [
     title: "Award-winning Design",
     description: "Our design philosophy merges form and function seamlessly, earning recognition from the world's most prestigious design institutions.",
     icon: Award,
+    color: "from-amber-400 to-orange-500",
     position: { x: 40, y: 80 },
     textPosition: "-50%, -100%"
+  }
+];
+
+// Additional innovation features for the new card layout
+const additionalFeatures = [
+  {
+    title: "AI-Powered Assistance",
+    description: "Built-in AI assistant learns your preferences and adapts to your riding style, offering personalized recommendations.",
+    icon: Cpu,
+    color: "from-pink-500 to-rose-500"
+  },
+  {
+    title: "Smart Safety Systems",
+    description: "360° proximity sensors with predictive collision avoidance technology, automatically adjusting to keep you safe.",
+    icon: Shield,
+    color: "from-red-400 to-red-600"
+  },
+  {
+    title: "Innovative Lighting",
+    description: "Adaptive headlights that respond to road conditions and turn with your steering, providing optimal visibility.",
+    icon: Lightbulb,
+    color: "from-yellow-400 to-amber-500"
   }
 ];
 
@@ -43,6 +71,7 @@ const InnovationSection = () => {
   });
 
   const [activeFeature, setActiveFeature] = useState(0);
+  const [selectedCard, setSelectedCard] = useState<number | null>(null);
   const featuresRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
@@ -131,7 +160,7 @@ const InnovationSection = () => {
         </div>
         
         {/* Main content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
           {/* Left: 3D Interactive Display */}
           <div className={cn(
             "relative transition-all duration-1000 transform perspective-3d",
@@ -227,34 +256,36 @@ const InnovationSection = () => {
             </div>
           </div>
           
-          {/* Right: Features List */}
-          <div className="space-y-8">
+          {/* Right: Features Cards - NEW SMALLER STYLE */}
+          <div className="space-y-4">
             {innovationFeatures.map((feature, index) => (
               <div 
                 key={index} 
                 className={cn(
-                  "feature-item transition-all duration-700 cursor-pointer premium-glass p-6 rounded-xl shine-effect",
+                  "feature-card transition-all duration-700 cursor-pointer bg-white rounded-xl shadow-lg overflow-hidden",
                   activeFeature === index ? "border-l-4 border-brand-teal" : "",
                   inView ? "opacity-100 transform translate-x-0" : "opacity-0 transform translate-x-8"
                 )}
                 style={{ transitionDelay: `${index * 100 + 300}ms` }}
                 onClick={() => setActiveFeature(index)}
               >
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 p-2 rounded-md bg-gradient-to-br from-brand-teal/30 to-brand-mint/20 mr-4">
-                    <feature.icon className="h-6 w-6 text-brand-teal" />
+                <div className="flex items-center p-4">
+                  <div className={`flex-shrink-0 p-2 rounded-md bg-gradient-to-br ${feature.color} mr-4`}>
+                    <feature.icon className="h-5 w-5 text-white" />
                   </div>
                   
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                    <p className="text-foreground/70">{feature.description}</p>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-medium mb-1">{feature.title}</h3>
+                    <p className="text-sm text-foreground/70 line-clamp-2">{feature.description}</p>
                   </div>
+                  
+                  <ChevronRight className="h-5 w-5 text-gray-400" />
                 </div>
               </div>
             ))}
             
             <div className={cn(
-              "transition-all duration-700",
+              "transition-all duration-700 mt-6",
               inView ? "opacity-100 transform translate-y-0" : "opacity-0 transform translate-y-8"
             )}
             style={{ transitionDelay: "800ms" }}
@@ -267,6 +298,98 @@ const InnovationSection = () => {
                 <Zap className="ml-2 h-5 w-5 transition-all duration-300 group-hover:scale-125" />
               </Button>
             </div>
+          </div>
+        </div>
+        
+        {/* NEW: More Interactive Section with Expandable Cards */}
+        <div className={cn(
+          "py-12 transition-all duration-1000",
+          inView ? "opacity-100" : "opacity-0"
+        )}>
+          <h3 className="text-2xl font-bold text-center mb-8">Explore More Innovations</h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {additionalFeatures.map((feature, index) => (
+              <Card
+                key={index}
+                className={cn(
+                  "overflow-hidden transition-all duration-500 hover:shadow-xl cursor-pointer transform",
+                  selectedCard === index ? "scale-105" : "hover:scale-102",
+                  inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                )}
+                style={{ transitionDelay: `${index * 150 + 400}ms` }}
+                onClick={() => setSelectedCard(selectedCard === index ? null : index)}
+              >
+                <div className={`h-2 bg-gradient-to-r ${feature.color}`}></div>
+                <div className="p-5">
+                  <div className="flex items-start mb-4">
+                    <div className={`flex-shrink-0 p-2 rounded-full bg-gradient-to-br ${feature.color} mr-3`}>
+                      <feature.icon className="h-5 w-5 text-white" />
+                    </div>
+                    <h3 className="text-lg font-medium">{feature.title}</h3>
+                  </div>
+                  
+                  <div className={cn(
+                    "overflow-hidden transition-all duration-500",
+                    selectedCard === index ? "max-h-96" : "max-h-20"
+                  )}>
+                    <p className="text-foreground/70">{feature.description}</p>
+                    
+                    {selectedCard === index && (
+                      <div className="mt-4 pt-4 border-t border-gray-100">
+                        <h4 className="font-medium mb-2">Key Benefits:</h4>
+                        <ul className="space-y-2">
+                          <li className="flex items-center">
+                            <span className="h-1.5 w-1.5 rounded-full bg-brand-teal mr-2"></span>
+                            <span className="text-sm">Enhanced performance in all conditions</span>
+                          </li>
+                          <li className="flex items-center">
+                            <span className="h-1.5 w-1.5 rounded-full bg-brand-teal mr-2"></span>
+                            <span className="text-sm">Intuitive user experience with smart controls</span>
+                          </li>
+                          <li className="flex items-center">
+                            <span className="h-1.5 w-1.5 rounded-full bg-brand-teal mr-2"></span>
+                            <span className="text-sm">Future-ready with OTA updates</span>
+                          </li>
+                        </ul>
+                        
+                        <Button variant="outline" size="sm" className="mt-4 group">
+                          Learn more
+                          <ChevronRight className="h-4 w-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" />
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+          
+          {/* Interactive Stats Section */}
+          <div className="mt-20 grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
+            {[
+              { label: "Battery Life", value: "150+ miles", icon: Zap },
+              { label: "Charging Time", value: "30 min", icon: Cpu },
+              { label: "Top Speed", value: "120 mph", icon: Sparkles },
+              { label: "Weight", value: "175 lbs", icon: Diamond }
+            ].map((stat, index) => (
+              <div 
+                key={index} 
+                className={cn(
+                  "premium-glass py-8 px-4 rounded-xl transition-all duration-700 transform hover:translate-y-[-5px] hover:shadow-xl",
+                  inView ? "opacity-100 scale-100" : "opacity-0 scale-90"
+                )}
+                style={{ transitionDelay: `${index * 100 + 600}ms` }}
+              >
+                <div className="flex justify-center mb-4">
+                  <div className="h-14 w-14 rounded-full bg-gradient-to-r from-brand-mint to-brand-teal flex items-center justify-center">
+                    <stat.icon className="h-7 w-7 text-white" />
+                  </div>
+                </div>
+                <div className="text-3xl font-bold mb-2">{stat.value}</div>
+                <div className="text-sm text-foreground/70">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

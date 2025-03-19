@@ -1,60 +1,58 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
-import { BadgeCheck, Sparkles, ArrowRight, LucideIcon, Star, Gem } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { HeartPulse, Shield, Star, Zap, ArrowRight, Trophy } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 
-interface PremiumFeature {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-  delay: number;
-}
-
-const premiumFeatures: PremiumFeature[] = [
-  {
-    icon: Sparkles,
-    title: "Premium Materials",
-    description: "Aerospace-grade carbon fiber and titanium alloys for unmatched durability",
-    delay: 100
-  },
+const premiumFeatures = [
   {
     icon: Star,
-    title: "Exclusive Design",
-    description: "Limited edition styling with premium finishes and custom detailing",
-    delay: 200
+    title: "Exclusive Access",
+    description: "Premium members receive early access to new models, limited editions, and exclusive color options before they're available to the public."
   },
   {
-    icon: Gem,
-    title: "Superior Performance",
-    description: "Enhanced motor efficiency and adaptive power management system",
-    delay: 300
+    icon: Shield,
+    title: "Extended Warranty",
+    description: "Enjoy comprehensive coverage with our industry-leading 5-year warranty on all components and battery performance."
   },
+  {
+    icon: Zap,
+    title: "Priority Service",
+    description: "Skip the line with dedicated service appointments and access to our VIP service team for any questions or needs."
+  },
+  {
+    icon: HeartPulse,
+    title: "Lifetime Support",
+    description: "Receive complimentary maintenance checks and software updates for the lifetime of your vehicle."
+  }
 ];
 
 const PremiumSection = () => {
-  const [activeCard, setActiveCard] = useState<number | null>(null);
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const mouseRef = useRef<{ x: number, y: number }>({ x: 0, y: 0 });
-  
-  const { ref, inView } = useInView({
-    triggerOnce: false,
-    threshold: 0.2,
+  const { ref: inViewRef, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: false
   });
+  
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isAnimating, setIsAnimating] = useState(false);
+  
+  const ref = (node: HTMLElement | null) => {
+    if (node) {
+      sectionRef.current = node;
+      inViewRef(node);
+    }
+  };
   
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!sectionRef.current) return;
+      
       const rect = sectionRef.current.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      const y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
       
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      mouseRef.current = { x, y };
-      
-      sectionRef.current.style.setProperty('--mouse-x', `${x}px`);
-      sectionRef.current.style.setProperty('--mouse-y', `${y}px`);
+      setMousePosition({ x, y });
     };
     
     const section = sectionRef.current;
@@ -72,14 +70,8 @@ const PremiumSection = () => {
   return (
     <section 
       id="premium"
-      ref={(node) => {
-        // Fixed TypeScript error by using proper type checking
-        if (node) {
-          sectionRef.current = node;
-          ref(node);
-        }
-      }}
-      className="relative py-32 overflow-hidden perspective-3d"
+      ref={ref}
+      className="section-spacing relative overflow-hidden bg-gradient-to-b from-gray-50 to-white"
     >
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-brand-dark-blue/10 to-black/5 backdrop-blur-sm"></div>
@@ -93,8 +85,8 @@ const PremiumSection = () => {
         </div>
       </div>
       
-      <div className="container relative z-10">
-        <div className="text-center">
+      <div className="container max-w-7xl mx-auto px-6 relative z-10">
+        <div className="text-center mb-16">
           <div className={cn(
             "inline-block premium-glass px-4 py-1.5 rounded-full mb-4 transition-all duration-700 ease-out transform-gpu",
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
@@ -131,7 +123,7 @@ const PremiumSection = () => {
           </p>
         </div>
         
-        <div className="relative mt-20">
+        <div className="relative mb-32">
           <div className={cn(
             "relative transform-3d transition-all duration-1000 ease-out",
             inView ? "opacity-100 translate-y-0 rotate-x-0" : "opacity-0 translate-y-20 rotate-x-12"
