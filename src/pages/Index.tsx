@@ -8,6 +8,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import GallerySection from "@/components/GallerySection";
 import ShowcaseSection from "@/components/ShowcaseSection";
 import PremiumSection from "@/components/PremiumSection";
+import InnovationSection from "@/components/InnovationSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 
@@ -52,6 +53,7 @@ const Index = () => {
         <HeroSection />
         <FeaturesSection />
         <DesignSection />
+        <InnovationSection />
         <TestimonialsSection />
         <GallerySection />
         <ShowcaseSection />

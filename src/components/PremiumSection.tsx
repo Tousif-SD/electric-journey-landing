@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
@@ -43,19 +42,16 @@ const PremiumSection = () => {
     threshold: 0.2,
   });
   
-  // Handle mouse movement for light effects
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
       
-      // Calculate mouse position relative to section
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       
       mouseRef.current = { x, y };
       
-      // Update CSS variables for reactive light effects
       sectionRef.current.style.setProperty('--mouse-x', `${x}px`);
       sectionRef.current.style.setProperty('--mouse-y', `${y}px`);
     };
@@ -72,7 +68,6 @@ const PremiumSection = () => {
     <section 
       id="premium"
       ref={(node) => {
-        // Assign to both refs - the section ref and inView ref
         if (node) {
           sectionRef.current = node;
           ref(node);
@@ -80,7 +75,6 @@ const PremiumSection = () => {
       }}
       className="relative py-32 overflow-hidden perspective-3d"
     >
-      {/* Holographic background */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-brand-dark-blue/10 to-black/5 backdrop-blur-sm"></div>
         <div className="holographic-foil absolute inset-0 opacity-20"></div>
@@ -94,8 +88,7 @@ const PremiumSection = () => {
       </div>
       
       <div className="container relative z-10">
-        {/* Section header */}
-        <div className="text-center mb-20 relative">
+        <div className="text-center">
           <div className={cn(
             "inline-block premium-glass px-4 py-1.5 rounded-full mb-4 transition-all duration-700 ease-out transform-gpu",
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
@@ -132,9 +125,7 @@ const PremiumSection = () => {
           </p>
         </div>
         
-        {/* 3D Premium Showcase */}
         <div className="relative mt-20">
-          {/* Main 3D Card */}
           <div className={cn(
             "relative transform-3d transition-all duration-1000 ease-out",
             inView ? "opacity-100 translate-y-0 rotate-x-0" : "opacity-0 translate-y-20 rotate-x-12"
@@ -146,12 +137,10 @@ const PremiumSection = () => {
               }}
             >
               <div className="relative p-8 md:p-12 rounded-2xl bg-gradient-to-br from-white/95 via-white/90 to-white/95 overflow-hidden">
-                {/* Holographic and light effects */}
                 <div className="absolute inset-0 holographic-glow opacity-10"></div>
                 <div className="absolute inset-0 overlay-grid"></div>
                 
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 md:gap-12 items-center">
-                  {/* Left content: 3D Image */}
                   <div className="lg:col-span-2 relative perspective-3d">
                     <div className={cn(
                       "transform-3d rounded-xl overflow-hidden premium-shadow-3d transition-all duration-700",
@@ -165,7 +154,6 @@ const PremiumSection = () => {
                         />
                         <div className="absolute inset-0 bg-gradient-to-tl from-brand-dark-blue/40 to-transparent"></div>
                         
-                        {/* Floating badge */}
                         <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-sm font-semibold">
                           <div className="flex items-center">
                             <BadgeCheck className="w-4 h-4 text-brand-teal mr-1.5" />
@@ -173,17 +161,14 @@ const PremiumSection = () => {
                           </div>
                         </div>
                         
-                        {/* Interactive shine effect */}
                         <div className="absolute inset-0 shine-overlay pointer-events-none"></div>
                       </div>
                     </div>
                     
-                    {/* Floating decorative elements */}
                     <div className="absolute -bottom-6 -right-6 w-24 h-24 rounded-full border border-brand-teal/20 animate-float-slow"></div>
                     <div className="absolute -top-4 -left-4 w-16 h-16 rounded-full border border-brand-mint/20 animate-float-slow" style={{ animationDelay: '1s' }}></div>
                   </div>
                   
-                  {/* Right content: Features */}
                   <div className="lg:col-span-3">
                     <h3 className="text-2xl md:text-3xl font-display font-bold mb-6">
                       Elevate Your Ride with <span className="text-brand-teal">Premium Features</span>
