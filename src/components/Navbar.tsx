@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X, ChevronRight, Search, ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -16,6 +16,7 @@ import {
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +26,11 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Close mobile menu when changing routes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   return (
     <header
@@ -36,8 +42,8 @@ const Navbar = () => {
       )}
     >
       <div className="container max-w-7xl mx-auto flex items-center justify-between px-4 lg:px-8">
+        {/* Logo */}
         <div className="flex items-center">
-          {/* Logo */}
           <Link to="/" className="relative z-10 flex items-center">
             <div className="flex items-center">
               <div className="text-brand-teal text-3xl font-bold mr-1 shine-effect">
@@ -154,16 +160,16 @@ const Navbar = () => {
           </Button>
           <Button 
             className="border border-brand-teal/60 bg-transparent hover:bg-brand-teal/10 text-foreground hover:text-brand-teal rounded-md transition-all duration-300"
-            onClick={() => window.location.href = '/login'}
           >
-            LOGIN
+            <Link to="/login" className="flex items-center">LOGIN</Link>
           </Button>
           <Button 
             className="bg-brand-teal hover:bg-brand-teal/90 text-white rounded-md btn-hover-effect group shine-effect"
-            onClick={() => window.location.href = '/get-started'}
           >
-            GET STARTED
-            <ArrowUpRight className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <Link to="/signup" className="flex items-center">
+              GET STARTED
+              <ArrowUpRight className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Link>
           </Button>
         </div>
 
@@ -209,17 +215,19 @@ const Navbar = () => {
             <MobileNavLink to="/contact" onClick={() => setIsMobileMenuOpen(false)}>Contact</MobileNavLink>
             <Button 
               className="mt-4 bg-brand-teal hover:bg-brand-teal/90 text-white w-full btn-hover-effect"
-              onClick={() => window.location.href = '/login'}
+              onClick={() => setIsMobileMenuOpen(false)}
             >
-              LOGIN
+              <Link to="/login" className="w-full">LOGIN</Link>
             </Button>
             <Button 
               variant="outline"
               className="border border-brand-teal/60 bg-transparent hover:bg-brand-teal/10 text-foreground w-full group"
-              onClick={() => window.location.href = '/get-started'}
+              onClick={() => setIsMobileMenuOpen(false)}
             >
-              GET STARTED
-              <ArrowUpRight className="h-4 w-4 ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <Link to="/signup" className="w-full flex items-center justify-center">
+                GET STARTED
+                <ArrowUpRight className="h-4 w-4 ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </Link>
             </Button>
           </div>
         </div>
